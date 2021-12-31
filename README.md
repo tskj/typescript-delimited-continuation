@@ -28,3 +28,5 @@ const result = 2 * x;
 ```
 
 The way this works is that promises essentially capture a continuation because of the way the async/await syntax works, and using this we can devise a simple api to call it directly, like we do in the shift function. Check out the implementation for some comments and more details.
+
+Note this only works if your computations inside reset are pure! Only pure functions, no side effects or you'll suffer the consequences!
