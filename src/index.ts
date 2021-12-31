@@ -13,7 +13,7 @@ type Continuation<Input, Output> = (input: Input) => Promise<Output>;
  * But again, a `Promise<Result>` for technical reasons
  */
 type Effect<Input, Output, Result> = (
-  k: Continuation<Input, Output>
+  k: Continuation<Input, Output>,
 ) => Promise<Result>;
 
 /**
@@ -30,8 +30,8 @@ type Effect<Input, Output, Result> = (
  */
 export const reset = async <Input, Output, Result>(
   computation: (
-    shift: (effect: Effect<Input, Output, Result>) => Promise<Input>
-  ) => Promise<Output>
+    shift: (effect: Effect<Input, Output, Result>) => Promise<Input>,
+  ) => Promise<Output>,
 ): Promise<Result> => {
   const k: Continuation<Input, Output> = (i) =>
     computation(() => Promise.resolve(i));
@@ -42,10 +42,3 @@ export const reset = async <Input, Output, Result>(
     return Promise.reject();
   }).catch(() => _effect(k) as any);
 };
-
-const test = await reset<number, number, string>(async (shift) => {
-  const b = await shift(async (k) => (1 + (await k(await k(2)))).toString());
-  return (b + 3) * 2;
-});
-
-console.log('test', test);
