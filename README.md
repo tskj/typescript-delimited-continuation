@@ -2,7 +2,7 @@
 
 This is a tiny experiment in pushing javascript as far as it will go. Don't use this in production please. Nevertheless you can try it out:
 
-```
+```bash
 npm i --save typescript-delimited-continuation
 ```
 
