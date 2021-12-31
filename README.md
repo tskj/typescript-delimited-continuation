@@ -1,6 +1,10 @@
 # Delimited Continuations in Typescript
 
-This is a tiny experiment in pushing javascript as far as it will go. Don't use this in production please.
+This is a tiny experiment in pushing javascript as far as it will go. Don't use this in production please. Nevertheless you can try it out:
+
+```
+npm i --save typescript-delimited-continuation
+```
 
 Delimited Continuations is a super cool concept, you can read more about it on [Wikipedia](https://en.wikipedia.org/wiki/Delimited_continuation). Turns out delimited continuations are isomorphic to Monads, and by god if Promises aren't monadic. And guess what uses Javascript Promises - async/await syntax! The async/await syntax is syntax sugar for promises, so what this library does is abuse promises to hijack the async/await syntax to implement delimited continuations control flow.
 

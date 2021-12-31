@@ -1,7 +1,7 @@
 {
   "name": "typescript-delimited-continuation",
   "version": "1.0.0",
-  "description": "",
+  "description": "Abusing async/await syntax to implement delimited contuations (in a type safe way!)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -50,5 +50,9 @@
     "transform": {
       "^.+\\.(ts|tsx)$": "ts-jest"
     }
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {}
 }
