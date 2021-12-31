@@ -60,3 +60,10 @@ test('use shift twice', async () => {
   });
   expect(test).toBe(5);
 });
+
+test('wikipedia example', async () => {
+  const test = await reset<number, number, number>(async (shift) => {
+    return 1 + (await shift((k) => k(5)));
+  });
+  expect(2 * test).toBe(12);
+});
