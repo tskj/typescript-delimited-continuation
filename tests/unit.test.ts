@@ -61,6 +61,16 @@ test('use shift twice', async () => {
   expect(test).toBe(5);
 });
 
+test('use dynamically scoped shift', async () => {
+  const test = await reset<number, number, number>(async function (this: any) {
+    console.log("what is this", this)
+    const x = await this.shift((k: any) => k(2));
+    const y = await this.shift((k: any) => k(7))
+    return x + y + 3;
+  });
+  expect(test).toBe(12);
+})
+
 test('wikipedia example', async () => {
   const test = await reset<number, number, number>(async (shift) => {
     return 1 + (await shift((k) => k(5)));

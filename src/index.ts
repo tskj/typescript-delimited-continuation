@@ -33,12 +33,17 @@ export const reset = async <Input, Output, Result>(
     shift: (effect: Effect<Input, Output, Result>) => Promise<Input>,
   ) => Promise<Output>,
 ): Promise<Result> => {
-  const k: Continuation<Input, Output> = (i) =>
-    computation(() => Promise.resolve(i));
+  const k: Continuation<Input, Output> = (i) => {
+    const shift = () => Promise.resolve(i)
+    return computation.bind({ shift })(shift);
+  }
 
   let _effect: Effect<Input, Output, Result>;
-  return await computation((effect: Effect<Input, Output, Result>) => {
+  const captureEffect = (effect: Effect<Input, Output, Result>) => {
     _effect = effect;
     return Promise.reject();
-  }).catch(() => _effect(k) as any);
+  }
+  const run = computation.bind({ shift: captureEffect })
+  return await run(captureEffect)
+    .catch(() => _effect(k) as any);
 };
